@@ -17,6 +17,7 @@ const createWindow = () => {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+    },
   });
 
   // and load the index.html of the app.
