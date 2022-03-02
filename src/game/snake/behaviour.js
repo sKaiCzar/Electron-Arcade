@@ -1,23 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-  pTag = document.querySelector("div");
-  newVal = document.createElement("p");
-  newVal.innerHTML = '';
-  pTag.appendChild(newVal);
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   pTag = document.querySelector("div");
+//   newVal = document.createElement("p");
+//   newVal.innerHTML = '';
+//   pTag.appendChild(newVal);
+// });
 // Async Tests Example
-/*
+
 window.onModulesLoaded = new Promise( function( resolve, reject ) {
   setTimeout(function() {
     pTag = document.querySelector("div");
     pTag.innerHTML = '';
     newVal = document.createElement("p");
-    newVal.innerHTML = 'Hello World';
+    newVal.innerHTML = '0';
     pTag.appendChild(newVal);
     resolve();
   }, 100)
 });
-*/
 
+let isGameActive = true;
 const board_border = 'black';
 const board_background = "white";
 const snake_col = 'lightblue';
@@ -46,6 +46,7 @@ let dy = 0;
 const snakeboard = document.getElementById("snakeboard");
 // Return a two dimensional drawing context
 const snakeboard_ctx = snakeboard.getContext("2d");
+new Promise(resolve => setTimeout(resolve, 1000));
 // Start game
 main();
 
@@ -56,7 +57,8 @@ document.addEventListener("keydown", change_direction);
 // main function called repeatedly to keep the game running
 function main() {
 
-    if (has_game_ended()) return;
+    if (has_game_ended())
+        return;
 
     changing_direction = false;
     setTimeout(function onTick() {
@@ -185,4 +187,31 @@ function move_snake() {
     // Remove the last part of snake body
     snake.pop();
   }
+}
+
+
+function reset() {
+
+    snake = [
+      {x: 200, y: 200},
+      {x: 190, y: 200},
+      {x: 180, y: 200},
+      {x: 170, y: 200},
+      {x: 160, y: 200}
+    ]
+
+    score = 0;
+    changing_direction = false;
+
+    dx = 10;
+    // Vertical velocity
+    dy = 0;
+
+    new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Start game
+    main();
+
+    gen_food();
+
 }
